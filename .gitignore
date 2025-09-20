@@ -1,0 +1,23 @@
+@"
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+*.sqlite3
+*.db
+
+# Secrets
+.env
+.env.*
+
+# Editors/OS
+.vscode/
+.DS_Store
+Thumbs.db
+"@ | Set-Content .gitignore
