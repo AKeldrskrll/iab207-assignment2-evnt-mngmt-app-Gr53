@@ -1,0 +1,256 @@
+/* Navigation bar */
+.navbar {
+  background-color: #39443d;
+  padding: 10px 0;
+}
+
+.navbar-brand{
+  margin-bottom: 10px;
+}
+
+.brand-logo{
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+
+.nav-link{
+  font-weight: 500;
+  font-size: 1.01rem;
+  color: #fff;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #fff;
+  transform: scale(1.05);
+}
+
+
+/* filter buttons */
+
+.filter-btn{
+  background-color: #39443d;
+  color: #fff;
+  border: 2px solid transparent;
+  border-radius: 30px;
+  padding: 8px 20px;
+  margin: 0 5px;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  background-color: #59695f;
+  color: #fff;
+  border:2px solid #fff;
+  border-radius: 30px;
+  padding: 8px 20px;
+  margin: 0 5px;
+  transform: scale(1.05);
+}
+
+.filter-btn:active{
+  background-color: #39443d;
+  color:#fff
+}
+
+/* card elements */
+
+.card{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #59695f;
+  color: #fff;
+  overflow: hidden;
+}
+
+.card-title{
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.card-text{
+  font-weight: 500;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.badge {
+  font-weight: 500;
+  padding: 10px 10px;
+  border-radius: 10px;
+}
+
+.card-btn {
+  display: block;
+  margin: 10px 20px;
+  padding: 4px 20px;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 500;
+  background-color: #39443d;
+  color: #fff;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.card-btn:hover {
+  background-color: #59695f;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  transform: scale(1.05);
+}
+
+/* event details page */
+
+.event-card {
+  background-color: #39443d;
+  color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.booking-section{
+  padding-top: 100px;
+}
+
+.booking-btn{
+  display: block;
+  margin: 10px 20px;
+  padding: 4px 20px;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 500;
+  background-color: #39443d;
+  color: #fff;
+  border: 2px solid #59695f;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.booking-btn:hover {
+  background-color: #59695f;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  transform: scale(1.05);
+}
+
+.booking-btn:active{
+  background-color: #39443d;
+  color:#fff
+}
+
+.comments-section{
+  background-color: #39443d;
+  color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.comment-text-area{
+  background-color: #333d37;
+  color: #fff;
+  border: 1px solid #59695f;
+  border-radius: 10px;
+  padding: 10px 15px;
+  width: 100%;
+  resize: vertical;
+  font-size: 0.95rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.comment-text-area:focus {
+  outline: none;
+  border: 1px solid #fff;
+  box-shadow: 0 0 5px rgba(255,255,255,0.3);
+  background-color: #333d37;
+}
+
+.post{
+  background-color: #333d37;
+  color: #fff;
+  border: 1px solid #59695f;
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin-bottom: 3px;
+  font-size: 0.9rem;
+}
+
+
+/* event creation and update */
+
+.event-form-container {
+  background-color: #39443d;
+  color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.form-control {
+  background-color: #333d37;
+  color: #fff;
+}
+
+.form-control:focus {
+  outline: none;
+  color: #fff;
+  border: 1px solid #fff;
+  box-shadow: 0 0 5px rgba(255,255,255,0.3);
+  background-color: #333d37;
+}
+
+.form-select {
+  background-color: #333d37;
+  color: #fff;
+}
+
+.form-select:focus {
+  outline: none;
+  color: #fff;
+  border: 1px solid #fff;
+  box-shadow: 0 0 5px rgba(255,255,255,0.3);
+  background-color: #333d37;
+}
+
+textarea::placeholder,
+input::placeholder {
+  color: #7e837f !important;
+  opacity: 1;
+}
+
+input[type="file"]::file-selector-button {
+  background-color: #39443d;
+  color: #fff;
+  border: none;
+  border-right: 1px solid #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* user validation */
+
+.user-form-container {
+  background-color: #39443d;
+  color: #fff;
+  width: 50%;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+
+
+
+
