@@ -18,7 +18,7 @@ env/
 *.sqlite3
 *.db
 # App-specific DB
-a2_group53/Cornerstone/instance/sitedata.sqlite
+a2_group53\Cornerstone\instance\sitedata.sqlite
 
 # Secrets
 .env

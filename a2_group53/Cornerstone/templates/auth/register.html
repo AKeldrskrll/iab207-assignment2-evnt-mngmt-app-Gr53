@@ -1,0 +1,23 @@
+{% extends "base.html %}
+{% from "bootstrap5/form.html" import render_form %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="container my-5 d-flex justify-content-center">
+    <div class="user-form-container p-4">
+        <h2 class="mb-4 text-center">Register Account</h2>
+
+        {{ render_form(form, action=url_for('auth.register')) }}
+        {#
+            WTForms + Bootstrap-Flask to render inputs for:
+            - Email Address
+            - User Name
+            - Password / Confirm
+            - Contact Number
+            - Street Address
+            - Submit
+
+        #}
+    </div>
+</div>
+{% endblock %}

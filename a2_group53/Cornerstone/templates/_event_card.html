@@ -1,0 +1,18 @@
+<div class="col-md-3">
+    <div class="card h-100">
+        <img src="{{ event.image_url }}" class="event-img-top">
+        <div class="card-body">
+            <h5 class="card-title">{{ event.title }}</h5>
+            <p class="card-text"> 
+                <strong>Arist:</strong> {{ event.artist }}<br>
+                <strong>Date:</strong> {{ event.date }}<br>
+                <strong>Venue:</strong> {{ event.venue }}<br>
+                <strong>Genre:</strong> {{ event.cetegory }}
+            </p>
+            {% include "_status_badge.html" %}
+        </div>
+        <div class="card-footer bg-transparent border-0">
+            <a href="#" class="card-btn"> View Event</a>
+        </div>
+    </div>
+</div>
