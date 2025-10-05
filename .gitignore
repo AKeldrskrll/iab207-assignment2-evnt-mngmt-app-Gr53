@@ -4,20 +4,27 @@ __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Virtual envs
 .venv/
 venv/
 env/
-.pytest_cache/
-.mypy_cache/
+
+# Databases / local state
+*.sqlite
 *.sqlite3
 *.db
+# App-specific DB
+a2_group53/Cornerstone/instance/sitedata.sqlite
 
 # Secrets
 .env
 .env.*
 
-# Editors/OS
+# Editors / OS
 .vscode/
 .DS_Store
 Thumbs.db
-"@ | Set-Content .gitignore
