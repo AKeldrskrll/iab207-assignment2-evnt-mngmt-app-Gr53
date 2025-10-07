@@ -15,20 +15,61 @@ def login():
     login_form = LoginForm()
     error = None
     if login_form.validate_on_submit():
-        user_name = login_form.user_name.data
+        user_name = login_form.user_name.data.strip()
         password = login_form.password.data
+
         user = db.session.scalar(db.select(User).where(User.name==user_name))
         if user is None:
             error = 'Incorrect user name'
         elif not check_password_hash(user.password_hash, password): # takes the hash and cleartext password
             error = 'Incorrect password'
+
         if error is None:
             login_user(user)
+
             nextp = request.args.get('next') # this gives the url from where the login page was accessed
-            print(nextp)
-            if next is None or not nextp.startswith('/'):
-                return redirect(url_for('index'))
+            if not nextp or not nextp.startswith('/'):
+                return redirect(url_for('main.index'))
             return redirect(nextp)
-        else:
-            flash(error)
+        flash(error)
     return render_template('user.html', form=login_form, heading='Login')
+
+@auth_bp.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash("You have been logged out.")
+    return redirect(url_for('main.index'))
+
+@auth_bp.route('/register', methods=['Get', 'POST'])
+def register():
+    form = RegisterForm()
+    if form.validate_on_submit():
+
+        name = form.user_name.data.strip()
+        email = form.email.data.strip().lower()
+
+        existing_name = db.session.scalar(db.select(User).where(User.name == name))
+        existing_email = db.session.scalar(db.select(User).where(User.email == email))
+        if existing_name:
+            flash("Username already taken.")
+            return render_template('user.html', form=form, heading='Register')
+        if existing_email:
+            flash("Email already registered")
+            return render_template('user.html', form=form, heading='Register')
+        
+        pw_hash = generate_password_hash(form.password.data).decode("utf-8")
+        user = User(
+            name=name,
+            email=email,
+            password_hash=pw_hash,
+            phone=getattr(form, "phone", None).data if hasattr(form, "phone") else None,
+            street_address=getattr(form, "street_address", None).data if hasattr(form, "street_address") else None,
+        )
+
+        db.session.add(user)
+        db.session.commit()
+
+        flash("Registration successful. Please log in.")
+        return redirect(url_for('auth.login'))
+    return render_template('user.html', form=form, heading='Register')

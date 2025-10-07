@@ -1,0 +1,7 @@
+{% set s = event.status %}
+<span class="badge
+    {% if s == 'Open' %} bg-success
+    {% elif s == 'Sold Out' %} bg-danger
+    {% elif s == 'Cancelled' %} bg-dark
+    {% else %} bg-warning text-dark
+    {% endif %}"> {{ s }}</span>

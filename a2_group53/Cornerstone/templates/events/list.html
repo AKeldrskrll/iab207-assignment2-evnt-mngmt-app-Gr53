@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Homepage{% endblock %}
+
+{% block content %}
+    <div class="container my-4">
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a class="btn {{ 'btn-primary' if c == category else 'btn-outline-light'}}"
+                href="{{ url_for('main.index') }}">All</a>
+            {% for c in categories %}
+                <a class="btn {{ 'btn-primary' if c == category else 'btn-outline-light' }}"
+                    href="{{ url_for('main.index', category=c) }}">{{ c }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+<div class="container">
+    <div class="row g-4">
+        {% for event in events %}
+            {% include "_event_card.html" %}
+        {% else %}
+            <p class="text-muted"> No events found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

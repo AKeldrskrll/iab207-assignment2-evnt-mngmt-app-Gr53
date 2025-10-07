@@ -1,4 +1,5 @@
 # import flask - from 'package' import 'Class'
+import os
 from flask import Flask 
 from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
@@ -14,16 +15,18 @@ def create_app():
     # Should be set to false in a production environment
     app.debug = True
     app.secret_key = 'somesecretkey'
+
+    instance_dir = os.path.join(app.root_path, 'instance')
+    os.makedirs(instance_dir, exist_ok=True)
+    db_path = os.path.join(instance_dir, 'sitedata.sqlite')
     # set the app configuration data 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sitedata.sqlite'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path.replace('\\', '/')
     # initialise db with flask app
     db.init_app(app)
-
     Bootstrap5(app)
     
     # initialise the login manager
     login_manager = LoginManager()
-    
     # set the name of the login function that lets user login
     # in our case it is auth.login (blueprintname.viewfunction name)
     login_manager.login_view = 'auth.login'
@@ -34,12 +37,15 @@ def create_app():
     from .models import User
     @login_manager.user_loader
     def load_user(user_id):
-       return db.session.scalar(db.select(User).where(User.id==user_id))
+       return db.session.scalar(db.select(User).where(User.id == user_id))
 
     from . import views
     app.register_blueprint(views.main_bp)
 
     from . import auth
     app.register_blueprint(auth.auth_bp)
+
+    with app.app_context():
+        db.create_all()
     
     return app
