@@ -11,7 +11,8 @@
             <li class="nav-item mx-2"><a class="nav-link" href="{{ url_for('main.index') }}">Events</a></li>
             {% if current_user.is_authenticated %}
                 <li class="nav-item mx-2"><a class="nav-link" href="{{ url_for('main.create_event') }}">Create Event</a></li>
-                <li class="nav-item mx-2"><a class="nav-link" href="{{ url_for('main.orders') }}">My Bookings</a></li>
+                <li class="nav-item mx-2"><a class="nav-link" href="{{ url_for('main.my_events') }}">My Events</a></li>
+                <li class="nav-item mx-2"><a class="nav-link" href="{{ url_for('main.orders') }}">My Orders</a></li>
                 <li class="nav-item mx-2"><a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a></li>
             {% else %}
                 <li class="nav-item mx-2"><a class="nav-link" href="{{ url_for('auth.login') }}">Login</a></li>

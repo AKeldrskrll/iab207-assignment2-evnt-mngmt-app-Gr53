@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+{% block title %}Edit Event{% endblock %}
+{% block content %}
+    <h2 class="mb-4">Edit Event</h2>
+    {{ render_form(form, action=url_for('main.edit_event', event_id=event.id)) }}
+{% endblock %}
