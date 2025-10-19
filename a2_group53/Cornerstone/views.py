@@ -121,10 +121,60 @@ def create_event():
         return redirect(url_for('main.event_detail', event_id=e.id))
     return render_template('events/create.html', form=form)
 
-@ main_bp.route( '/orders')
+@main_bp.route( '/orders')
 @login_required
 def orders():
     orders = db.session.scalars(
         db.select(Order).where(Order.user_id==current_user.id).order_by(Order.created_at.desc())
     ).all()
     return render_template('orders/list.html', orders=orders)
+
+def _owner_required(event: Event):
+    if (not current_user.is_authenticated) or (current_user.id != event.owner_id):
+        abort(403)
+
+@main_bp.route('/events/<int:event_id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_event(event_id):
+    event = db.session.get(Event, event_id)
+    if not event: abort(404)
+    _owner_required(event)
+
+    form = EventForm(obj=event)
+    if form.validate_on_submit():
+        event.title=form.title.data.strip()
+        event.description=form.description.data.strip()
+        event.image_url=(form.image_url.data.strip() if form.image_url.data else None)
+        event.category=form.category.data
+        event.venue=form.venue.data.strip()
+        event.artist=form.artist.data.strip()
+        event.date=form.date.data
+        event.capacity=form.capacity.data or 0
+        event.price=Decimal(str(form.price.data))
+        db.session.commit()
+        flash("Event updated.")
+        return redirect(url_for('main.event_detail', event_id=event.id))
+    return render_template('events/edit.html', form=form, event=event)
+
+@main_bp.route('/events/<int:event_id>/cancel', methods=['POST'])
+@login_required
+def cancel_event(event_id):
+    event = db.session.get(Event, event_id)
+    if not event: abort(404)
+    _owner_required(event)
+    if event.cancelled:
+        flash("Event already cancelled.")
+    else:
+        event.cancelled = True
+        db.session.commit()
+        flash("Event cancelled.")
+    return redirect(url_for('main.event_detail', event_id=event_id))
+
+@main_bp.route('/my-events')
+@login_required
+def my_events():
+    events = db.session.scalars(
+        db.select(Event).where(Event.owner_id == current_user.id).order_by(Event.date.desc())
+    ).all()
+    return render_template('events/my_events.html', events=events)
+    
