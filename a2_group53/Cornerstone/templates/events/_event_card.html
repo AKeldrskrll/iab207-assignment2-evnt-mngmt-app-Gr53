@@ -1,0 +1,25 @@
+<div class="col-md-3">
+    <div class="card h-100">
+        {% set img = event.image_url or 'img/placeholder.jpg' %}
+        {% if img.startswith('http://') or img.startswith('https://') %}
+            <img src="{{ img }}" class="event-img-top" alt="{{ event.title }}">
+        {% else %}
+            <img src="{{ url_for('static', filename=img.lstrip('/')) }}" class="event-img-top" alt="{{ event.title }}">
+        {% endif %}
+
+        <div class="card-body">
+            <h5 class="card-title">{{ event.title }}</h5>
+            <p class="card-text"> 
+                <strong>Arist:</strong> {{ event.artist }}<br>
+                <strong>Date:</strong> {{ event.date.strftime( '%d/%m/%Y') if event.date else '' }}<br>
+                <strong>Venue:</strong> {{ event.venue }}<br>
+                <strong>Genre:</strong> {{ event.category }}<br>
+                <strong>Price:</strong> ${{ '%.2f'|format(event.price or 0) }}<br>
+            </p>
+            {% include "events/_status_badge.html" %}
+        </div>
+        <div class="card-footer bg-transparent border-0">
+            <a href="{{ url_for('main.event_detail', event_id=event.id) }}" class="card-btn">View Event</a>
+        </div>
+    </div>
+</div>

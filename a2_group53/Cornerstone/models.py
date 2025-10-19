@@ -1,6 +1,8 @@
 from . import db
 from datetime import datetime, date
 from flask_login import UserMixin
+from sqlalchemy import Numeric
+from uuid import uuid4
 
 #USER
 class User(db.Model, UserMixin):
@@ -9,6 +11,8 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     #Identity
     name = db.Column(db.String(80), unique=True, nullable=False)
+    first_name = db.Column(db.String(80))
+    last_name = db.Column(db.String(80))
     email = db.Column(db.String(80), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
 
@@ -46,6 +50,8 @@ class Event(db.Model):
     date = db.Column(db.Date, nullable=False)
     capacity = db.Column(db.Integer, nullable=False, default=0)
     tickets_sold = db.Column(db.Integer, nullable=False, default=0)
+
+    price = db.Column(Numeric(8, 2), nullable=False, default=0) 
 
     #lifecycle indicators
     cancelled = db.Column(db.Boolean, nullable=False, default=False)
@@ -95,10 +101,14 @@ class Order(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     event_id = db.Column(db.Integer, db.ForeignKey("event.id"), nullable=False)
     qty = db.Column(db.Integer, nullable=False, default=1)
-    price = db.Column(db.Numeric(8, 2))
+    price = db.Column(db.Numeric(8, 2), nullable=False, default=0)
 
     order_id = db.Column(db.String(64), unique=True, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __repr__(self):
-        return f"<Order id ={self.id} order_id={self.order_id!r}>"
+        return f"<Order id ={self.id} order_id={self.order_id!r} user={self.user_id} event{self.event_id}>"
+    
+def make_order_id(event_id: int) -> str:
+    """Generate a unqiue order reference"""
+    return f"EV{event_id}-{str(uuid4())[:8].upper()}"

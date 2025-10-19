@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}My Bookings{% endblock %}
+{% block content %}
+<h2>My Bookings</h2>
+{% if orders %}
+      <div class="table-responsive">
+    <table class="table table-dark table-striped align-middle">
+      <thead>
+        <tr><th>Order ID</th><th>Event</th><th>Qty</th><th>Unit Price</th><th>Total</th><th>Date</th></tr>
+      </thead>
+      <tbody>
+        {% for o in orders %}
+          <tr>
+            <td>{{ o.order_id }}</td>
+            <td><a href="{{ url_for('main.event_detail', event_id=o.event_id) }}" class="link-light">
+              {{ o.event.title if o.event else 'Event' }}
+            </a></td>
+            <td>{{ o.qty }}</td>
+            <td>${{ '%.2f'|format(o.price or 0) }}</td>
+            <td>${{ '%.2f'|format((o.price or 0) * (o.qty or 0)) }}</td>
+            <td>{{ o.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <p class="comment-date">No bookings yet.</p>
+{% endif %}
+{% endblock %}
