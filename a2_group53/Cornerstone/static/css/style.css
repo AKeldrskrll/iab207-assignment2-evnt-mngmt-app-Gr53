@@ -23,6 +23,13 @@
   text-decoration: none;
 }
 
+.nav-name{
+  font-weight: 500;
+  font-size: 1.01rem;
+  color: #98ad94;
+  text-decoration: none;
+}
+
 .nav-link:hover {
   color: #fff;
   transform: scale(1.05);
@@ -175,6 +182,11 @@
   background-color: #333d37;
 }
 
+.comment-date{
+  color: #98ad94;
+
+}
+
 .post{
   background-color: #333d37;
   color: #fff;
@@ -250,7 +262,21 @@ input[type="file"]::file-selector-button {
   margin-bottom: 20px;
 }
 
+/* Footer separator & link styling */
+.footer-sep {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
 
+.footer-link {
+  color: #9ea7a1;
+  text-decoration: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.footer-link:hover {
+  color: #ffffff;
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
 
 
 

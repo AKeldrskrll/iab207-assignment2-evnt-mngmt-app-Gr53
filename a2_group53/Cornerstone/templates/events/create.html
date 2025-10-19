@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+{% block title %}Create Event{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="event-form-container p-4">
+        <h2 class="mb-4 text-center">Create Event</h2>
+        {{ render_form(form, action=url_for('main.create_event')) }}
+
+        {# show validations errors while developing #}
+        {% if form.errors %}
+            <div class="alert alert-warning mt-3"><pre class="mb-0">{{ form.errors }}</pre></div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
