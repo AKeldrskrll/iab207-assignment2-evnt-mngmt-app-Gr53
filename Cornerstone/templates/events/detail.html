@@ -8,7 +8,16 @@
 
         <!-- Image -->
         <div class="col-md-6">
-            <img src="{{ event.image_url }}" class="card-img-top" alt="{{ event.title }}">
+            <img
+                src="{% if event.image_url and event.image_url[:4] == 'http' %}
+                        {{ event.image_url }}
+                    {% else %}
+                        {{ url_for('static', filename=(event.image_url or 'img/placeholder.jpg')) }}
+                    {% endif %}"
+                alt="{{ event.title }}"
+                class="img-fluid w-100 rounded shadow-sm event-detail-img"
+            />
+            
         </div> 
 
         <!-- Event info -->

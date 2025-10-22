@@ -16,8 +16,8 @@ Run the commands under the number sections
    .\venv\Scripts\Activate.ps1
 
 3. Install dependencies:
-   pip install -r a2_group53\requirements.txt
+   pip install -r requirements.txt
 
 4. Run the app:
-   python a2_group53\main.py
+   python main.py
    The app should be at http://127.0.0.1:5000/

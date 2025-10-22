@@ -278,5 +278,20 @@ input[type="file"]::file-selector-button {
   transform: translateY(-1px);
 }
 
+.event-detail-img {
+  width: 100%;
+  height: auto;
+  max-height: 1000px;
+  object-fit: cover;
+  display: block;
+}
 
+@media (min-width: 992px) {
+  .event-card .col-md-6:first-child {
+    padding-right: 1rem;
+  }
+  .event-card .col-md-6:last-child {
+    padding-left: 1rem;
+  }
+}
 
